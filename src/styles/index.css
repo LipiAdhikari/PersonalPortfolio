@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-heading: "Space Grotesk", system-ui, sans-serif;
+
+  --color-background: var(--bg-base);
+  --color-foreground: var(--text-primary);
+
+  --color-primary: var(--accent);
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: var(--surface-glass);
+  --color-secondary-foreground: var(--text-primary);
+
+  --color-muted: var(--surface-glass);
+  --color-muted-foreground: var(--text-secondary);
+}
+
+@layer base {
+  :root {
+    --bg-base: #faf9fc;
+    --surface-glass: rgba(255, 255, 255, 0.55);
+    --surface-glass-border: rgba(255, 255, 255, 0.8);
+    --purple: #b9a6f2;
+    --pink: #f6b9d1;
+    --sky: #a9d4f5;
+    --accent: #8b6cf0;
+    --text-primary: #241f33;
+    --text-secondary: #5a546e; /* Darkened from #6b6580 for WCAG contrast */
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background-color: var(--surface-glass);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--surface-glass-border);
+  }
+
+  .project-card {
+    transition: transform 400ms cubic-bezier(0.25, 1, 0.5, 1),
+                box-shadow 400ms cubic-bezier(0.25, 1, 0.5, 1),
+                border-color 300ms ease,
+                background 300ms ease;
+  }
+  
+  @media (hover: hover) and (pointer: fine) {
+    .project-card:hover {
+      transform: translateY(-8px) scale(1.015);
+      box-shadow: 0 20px 40px -15px rgba(139, 108, 240, 0.15), 0 0 0 1px rgba(139, 108, 240, 0.1);
+      border-color: rgba(139, 108, 240, 0.3);
+      background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.4)),
+                  linear-gradient(to bottom right, rgba(185, 166, 242, 0.03), rgba(169, 212, 245, 0.03));
+    }
+    
+    .project-card:hover .project-icon-folder {
+      transform: translateY(-3px) scale(1.05);
+      color: var(--accent);
+    }
+    
+    .project-card:hover .project-icon-link {
+      transform: translate(3px, -3px);
+      color: var(--accent);
+    }
+    
+    .project-card:hover .project-title {
+      color: var(--accent);
+    }
+    
+    .project-card:hover .project-tech-tag {
+      transform: translateY(-1px);
+      background-color: rgba(255, 255, 255, 0.9);
+      border-color: rgba(139, 108, 240, 0.2);
+    }
+  }
+
+  .project-icon-folder, .project-icon-link, .project-title, .project-tech-tag {
+    transition: transform 400ms cubic-bezier(0.25, 1, 0.5, 1),
+                color 300ms ease,
+                background-color 300ms ease,
+                border-color 300ms ease;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .project-card, .project-card:hover, .project-icon-folder, .project-icon-link, .project-title, .project-tech-tag {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+}
