@@ -12,6 +12,7 @@ import { Contact } from './components/sections/Contact';
 import { CustomCursor } from './components/ui/CustomCursor';
 import { Preloader } from './components/layout/Preloader';
 import { AnimatedBackground } from './components/layout/AnimatedBackground';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           </main>
           <Footer />
         </div>
+        <Analytics />
       </div>
     </Preloader>
   );
