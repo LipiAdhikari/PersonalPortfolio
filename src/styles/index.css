@@ -51,8 +51,11 @@
 @layer utilities {
   .glass-panel {
     background-color: var(--surface-glass);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid var(--surface-glass-border);
+    transform: translateZ(0);
+    will-change: transform, backdrop-filter;
   }
 
   .project-card {

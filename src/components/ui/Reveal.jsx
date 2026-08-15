@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { usePreloader } from '../layout/Preloader';
 
 export const Reveal = ({ children, delay = 0, y = 24, once = true, amount = 0.2, className = '', type = 'up' }) => {
   const [shouldAnimate, setShouldAnimate] = useState(true);
+  const { isFinished } = usePreloader();
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -30,7 +32,7 @@ export const Reveal = ({ children, delay = 0, y = 24, once = true, amount = 0.2,
     <motion.div
       variants={selectedVariant}
       initial="hidden"
-      whileInView="visible"
+      whileInView={isFinished ? "visible" : "hidden"}
       viewport={{ once, amount }}
       transition={{ 
         duration: 0.6, 

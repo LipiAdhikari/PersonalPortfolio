@@ -49,6 +49,8 @@ export const Skills = () => {
             >
               <img 
                 src={item.src} 
+                width="48"
+                height="48"
                 className={`${item.w} ${item.invert ? 'filter invert brightness-0 opacity-80' : ''}`} 
                 alt="Tech Icon" 
                 loading="lazy"
@@ -98,6 +100,8 @@ export const Skills = () => {
                       <img 
                         src={skill.icon} 
                         alt={skill.name} 
+                        width="16"
+                        height="16"
                         className={`w-4 h-4 mr-1.5 object-contain ${skill.invertDark ? 'dark:invert' : ''}`} 
                         loading="lazy"
                       />

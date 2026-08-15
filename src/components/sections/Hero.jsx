@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, useReducedMotion, useTransform } from 'framer-motion';
 import { useMouseParallax } from '../../hooks/useMouseParallax';
 import { profile } from '../../data/profile';
 import { Button } from '../ui/Button';
 import { Reveal } from '../ui/Reveal';
+import { usePreloader } from '../layout/Preloader';
 
 const phrases = [
   "A BIM Student",
@@ -12,8 +13,6 @@ const phrases = [
   "Tech Enthusiast"
 ];
 
-
-
 export const Hero = () => {
   const [currentPhrase, setCurrentPhrase] = useState(0);
   const [text, setText] = useState('');
@@ -21,6 +20,7 @@ export const Hero = () => {
   const [startTypewriter, setStartTypewriter] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const nameChars = profile.name.split('');
+  const { isFinished } = usePreloader();
 
   const { x, y } = useMouseParallax(120, 25);
   const imgX = useTransform(x, [-1, 1], [-20, 20]);
@@ -28,45 +28,61 @@ export const Hero = () => {
 
   const containerVariants = {
     hidden: {},
-    visible: { transition: { staggerChildren: 0.08, delayChildren: 0.2 } },
-  };
-  
-  const charVariants = {
-    hidden: { opacity: 0 },
     visible: {
-      opacity: 1,
-      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-    },
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
   };
 
-  useEffect(() => {
+  const charVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100
+      }
+    }
+  };
+
+  // Typewriter effect
+  React.useEffect(() => {
     if (prefersReducedMotion) {
       setText(phrases[0]);
-      setStartTypewriter(true);
       return;
     }
 
     if (!startTypewriter) return;
 
-    const typeSpeed = isDeleting ? 50 : 100;
-    const currentFullText = phrases[currentPhrase];
+    const currentString = phrases[currentPhrase];
     
-    const timer = setTimeout(() => {
-      if (!isDeleting && text === currentFullText) {
-        setTimeout(() => setIsDeleting(true), 1500);
-      } else if (isDeleting && text === '') {
-        setIsDeleting(false);
-        setCurrentPhrase((prev) => (prev + 1) % phrases.length);
-      } else {
-        setText(currentFullText.substring(0, text.length + (isDeleting ? -1 : 1)));
-      }
-    }, typeSpeed);
+    let timer;
+    if (isDeleting) {
+      timer = setTimeout(() => {
+        setText(currentString.substring(0, text.length - 1));
+      }, 50); // Deleting speed
+    } else {
+      timer = setTimeout(() => {
+        setText(currentString.substring(0, text.length + 1));
+      }, 100); // Typing speed
+    }
+
+    if (!isDeleting && text === currentString) {
+      timer = setTimeout(() => setIsDeleting(true), 2000); // Wait before deleting
+    } else if (isDeleting && text === '') {
+      setIsDeleting(false);
+      setCurrentPhrase((prev) => (prev + 1) % phrases.length);
+    }
 
     return () => clearTimeout(timer);
   }, [text, isDeleting, currentPhrase, startTypewriter, prefersReducedMotion]);
 
   return (
-    <section id="home" className="min-h-[100dvh] flex items-center justify-center relative pt-16 overflow-hidden">
+    <section id="home" className="relative min-h-[100dvh] flex items-center justify-center pt-20 pb-12 overflow-hidden">
       
 
 
@@ -75,7 +91,7 @@ export const Hero = () => {
           <div>
             <motion.p 
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              animate={{ opacity: isFinished ? 1 : 0 }}
               transition={{ duration: 0.5 }}
               className="text-primary font-medium tracking-wider uppercase mb-4"
             >
@@ -84,7 +100,7 @@ export const Hero = () => {
             
             <motion.h1 
               initial="hidden"
-              animate="visible"
+              animate={isFinished ? "visible" : "hidden"}
               variants={containerVariants}
               onAnimationComplete={() => setStartTypewriter(true)}
               className="text-5xl md:text-7xl font-bold tracking-tighter text-foreground mb-6 flex flex-wrap"
@@ -98,7 +114,7 @@ export const Hero = () => {
             
             <motion.div
               initial={{ opacity: 0 }}
-              animate={startTypewriter ? { opacity: 1 } : { opacity: 0 }}
+              animate={startTypewriter && isFinished ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.5 }}
             >
               <h2 className="text-2xl md:text-4xl font-medium text-muted-foreground mb-4 leading-tight h-10 md:h-12 flex items-center">
@@ -131,7 +147,7 @@ export const Hero = () => {
           <motion.div 
             whileHover={{ scale: 1.05, rotate: 2 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="relative w-full h-full"
+            className="relative w-full h-full aspect-square"
             style={{ x: imgX, y: imgY }}
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-primary to-sky rounded-full blur-2xl opacity-20 animate-pulse" />
@@ -139,6 +155,8 @@ export const Hero = () => {
               <img 
                 src="/lipi-adhikari.png" 
                 alt={profile.name} 
+                width="320"
+                height="320"
                 className="w-full h-full object-cover object-[50%_20%] scale-110 rounded-full shadow-[0_0_40px_rgba(139,108,240,0.15)]"
               />
             </div>

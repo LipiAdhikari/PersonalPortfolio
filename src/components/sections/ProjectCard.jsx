@@ -6,7 +6,7 @@ import { Badge } from '../ui/Badge';
 
 export const ProjectCard = ({ project }) => {
   return (
-    <Card className="project-card flex flex-col h-full bg-white/40 backdrop-blur-md border border-black/5 rounded-2xl p-6 shadow-sm">
+    <Card className="project-card flex flex-col h-full bg-white/40 backdrop-blur-sm border border-black/5 rounded-2xl p-6 shadow-sm">
       <div className="flex justify-between items-center mb-8">
         <Folder strokeWidth={1.5} size={40} className="project-icon-folder text-primary/70" />
         <div className="flex gap-4">

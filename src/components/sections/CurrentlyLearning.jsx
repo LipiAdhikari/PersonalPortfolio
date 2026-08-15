@@ -64,7 +64,7 @@ export const CurrentlyLearning = () => {
               key={idx}
               variants={itemVariants}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              className="group glass-panel p-6 md:p-8 rounded-2xl flex flex-col h-full bg-white/60 backdrop-blur-xl border border-black/5 hover:border-primary/30 transition-colors duration-300 shadow-sm hover:shadow-[0_10px_40px_rgb(0,0,0,0.05)] relative overflow-hidden"
+              className="group glass-panel p-6 md:p-8 rounded-2xl flex flex-col h-full bg-white/60 backdrop-blur-md border border-black/5 hover:border-primary/30 transition-colors duration-300 shadow-sm hover:shadow-[0_10px_40px_rgb(0,0,0,0.05)] relative overflow-hidden"
             >
               {/* Subtle gradient glow inside card on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none" />

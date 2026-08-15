@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createContext, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from '../ui/Logo';
+
+export const PreloaderContext = createContext({ isFinished: true });
+
+export const usePreloader = () => useContext(PreloaderContext);
 
 export const Preloader = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -38,7 +42,7 @@ export const Preloader = ({ children }) => {
   };
 
   return (
-    <>
+    <PreloaderContext.Provider value={{ isFinished: shouldRenderContent }}>
       <AnimatePresence onExitComplete={() => setShouldRenderContent(true)}>
         {isLoading && (
           <motion.div
@@ -72,15 +76,20 @@ export const Preloader = ({ children }) => {
         )}
       </AnimatePresence>
       
-      {shouldRenderContent && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {children}
-        </motion.div>
-      )}
-    </>
+      {/* We mount the children immediately, but keep them invisible and un-clickable 
+          until the preloader is fully gone. This fixes the CLS problem because the browser
+          can fetch images and compute layout in the background. */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ 
+          opacity: shouldRenderContent ? 1 : 0, 
+          scale: shouldRenderContent ? 1 : 0.95 
+        }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        style={{ pointerEvents: shouldRenderContent ? 'auto' : 'none' }}
+      >
+        {children}
+      </motion.div>
+    </PreloaderContext.Provider>
   );
 };
