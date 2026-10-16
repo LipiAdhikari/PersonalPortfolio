@@ -19,8 +19,8 @@ export const timeline = [
     title: "Bachelor of Information Management (BIM)",
     org: "Kanya Campus, Pokhara",
     period: "2024 — Present",
-    description: "Currently pursuing my BIM degree and building a strong foundation in programming, databases, web development, information systems and software development. Currently in my 4th semester with a GPA of 3.88+.",
-    tags: ["BIM", "4th Semester", "GPA 3.88+"],
+    description: "Currently pursuing my BIM degree and building a strong foundation in programming, databases, web development, information systems and software development. Currently in my 5th semester with a GPA of 3.98+.",
+    tags: ["BIM", "5th Semester", "GPA 3.98+"],
     highlighted: false
   },
   {

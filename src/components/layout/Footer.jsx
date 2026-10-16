@@ -24,7 +24,7 @@ export const Footer = () => {
               {profile.name}
             </h3>
             <p className="text-muted-foreground text-sm font-medium mb-6 max-w-sm text-center">
-              BIM Student • Developer • Builder • Curious Mind
+              BIM 5th Sem Student • Developer • Builder • Curious Mind
             </p>
             <div className="flex justify-center gap-4">
               <motion.a 

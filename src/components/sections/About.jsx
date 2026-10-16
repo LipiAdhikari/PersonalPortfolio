@@ -24,7 +24,7 @@ export const About = () => {
             Crafting Ideas Into Meaningful <span className="text-primary italic">Solutions</span>
           </h3>
           <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-            I am a Bachelor of Information Management (BIM) student with a growing passion for technology, creativity, and problem-solving. I enjoy exploring how ideas can be transformed into practical digital experiences that are useful, intuitive, and meaningful to people.
+            I am a Bachelor of Information Management (BIM) 5th semester student with a growing passion for technology, creativity, and problem-solving. I enjoy exploring how ideas can be transformed into practical digital experiences that are useful, intuitive, and meaningful to people.
           </p>
           <div className="space-y-6 text-muted-foreground mb-10 leading-relaxed">
             <p>

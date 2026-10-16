@@ -7,7 +7,7 @@ import { Reveal } from '../ui/Reveal';
 import { usePreloader } from '../layout/Preloader';
 
 const phrases = [
-  "A BIM Student",
+  "A BIM 5th Sem Student",
   "Frontend Developer",
   "Full-Stack Developer in Progress",
   "Tech Enthusiast"
