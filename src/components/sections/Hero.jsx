@@ -103,7 +103,7 @@ export const Hero = () => {
               animate={isFinished ? "visible" : "hidden"}
               variants={containerVariants}
               onAnimationComplete={() => setStartTypewriter(true)}
-              className="text-5xl md:text-7xl font-bold tracking-tighter text-foreground mb-6 flex flex-wrap"
+              className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-foreground mb-6 flex flex-wrap"
             >
               {nameChars.map((char, i) => (
                 <motion.span key={i} variants={charVariants}>
@@ -117,9 +117,9 @@ export const Hero = () => {
               animate={startTypewriter && isFinished ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-2xl md:text-4xl font-medium text-muted-foreground mb-4 leading-tight h-10 md:h-12 flex items-center">
+              <h2 className="text-xl sm:text-2xl md:text-4xl font-medium text-muted-foreground mb-4 leading-tight min-h-10 md:h-12 flex items-center flex-wrap">
                 <span className="text-foreground">{text}</span>
-                <span className="w-1 h-8 md:h-10 ml-1 bg-primary animate-pulse inline-block" />
+                <span className="w-1 h-6 sm:h-8 md:h-10 ml-1 bg-primary animate-pulse inline-block" />
               </h2>
               
               <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl leading-relaxed">

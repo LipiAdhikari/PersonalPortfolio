@@ -71,12 +71,12 @@ export const Contact = () => {
           <motion.div
             animate={{ y: [0, -10, 0], rotate: [0, 5, -5, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-12 -left-8 w-20 h-20 bg-gradient-to-br from-primary/20 to-sky/20 rounded-full blur-xl pointer-events-none"
+            className="absolute -top-12 left-0 md:-left-8 w-20 h-20 bg-gradient-to-br from-primary/20 to-sky/20 rounded-full blur-xl pointer-events-none"
           />
           <motion.div
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-4 -left-2 w-10 h-10 bg-white/60 backdrop-blur-md rounded-xl border border-black/5 flex items-center justify-center text-primary shadow-sm pointer-events-none rotate-12"
+            className="absolute -top-4 left-0 md:-left-2 w-10 h-10 bg-white/60 backdrop-blur-md rounded-xl border border-black/5 flex items-center justify-center text-primary shadow-sm pointer-events-none rotate-12"
           >
             <Code2 size={20} />
           </motion.div>

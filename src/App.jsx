@@ -17,13 +17,13 @@ import { Analytics } from '@vercel/analytics/react';
 function App() {
   return (
     <Preloader>
-      <div className="bg-background text-foreground min-h-screen font-sans selection:bg-primary/30 selection:text-primary-foreground relative">
+      <div className="bg-background text-foreground min-h-screen font-sans selection:bg-primary/30 selection:text-primary-foreground relative w-full overflow-x-hidden">
         <CustomCursor />
         <AnimatedBackground />
 
-        <div className="relative z-10">
+        <div className="relative z-10 w-full overflow-x-hidden">
           <Navbar />
-          <main>
+          <main className="w-full overflow-x-hidden">
             <Hero />
             <About />
             <Skills />

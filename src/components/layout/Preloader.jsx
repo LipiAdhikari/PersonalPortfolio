@@ -87,6 +87,7 @@ export const Preloader = ({ children }) => {
         }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         style={{ pointerEvents: shouldRenderContent ? 'auto' : 'none' }}
+        className="w-full overflow-x-hidden"
       >
         {children}
       </motion.div>

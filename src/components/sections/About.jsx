@@ -56,8 +56,8 @@ export const About = () => {
               <motion.div 
                 key={idx} 
                 variants={{
-                  hidden: { opacity: 0, x: -24 },
-                  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
                 }}
                 className="p-4 glass-panel text-center flex flex-col items-center justify-center"
               >
@@ -91,8 +91,8 @@ export const About = () => {
                   <motion.div 
                     key={idx} 
                     variants={{
-                      hidden: { opacity: 0, x: -24 },
-                      visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+                      hidden: { opacity: 0, y: 20 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
                     }}
                     className="p-5 glass-panel flex flex-col gap-3 transition-colors hover:border-primary/30"
                   >

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Section } from '../layout/Section';
 import { timeline } from '../../data/timeline';
 import { Badge } from '../ui/Badge';
@@ -7,6 +7,17 @@ import { motion, useScroll, useReducedMotion } from 'framer-motion';
 export const Journey = () => {
   const containerRef = useRef(null);
   const prefersReducedMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(() => 
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -29,15 +40,25 @@ export const Journey = () => {
           {timeline.map((item, idx) => {
             const isEven = idx % 2 === 0;
             // On desktop: isEven means card is on the left (slides from left). !isEven means card is on right (slides from right)
-            // On mobile: everything slides from left, or just simple fade to avoid horizontal scrollbar issues.
-            const xOffset = isEven ? -50 : 50;
+            // On mobile: everything slides from bottom (y) to avoid horizontal scrollbar issues.
+            const xOffset = isMobile ? 0 : (isEven ? -50 : 50);
+            const yOffset = isMobile ? 24 : 0;
 
             return (
               <motion.div 
                 key={idx}
                 variants={{
-                  hidden: { opacity: 0, x: prefersReducedMotion ? 0 : xOffset },
-                  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+                  hidden: { 
+                    opacity: 0, 
+                    x: prefersReducedMotion ? 0 : xOffset,
+                    y: prefersReducedMotion ? 0 : yOffset 
+                  },
+                  visible: { 
+                    opacity: 1, 
+                    x: 0, 
+                    y: 0, 
+                    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } 
+                  }
                 }}
                 initial="hidden"
                 whileInView="visible"
